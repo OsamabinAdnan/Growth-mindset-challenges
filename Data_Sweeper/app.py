@@ -12,12 +12,12 @@ st.write("Transform your files 📂 between CSV and Excel formats")
 uploaded_file = st.file_uploader("Upload your files here (CSV or Excel):", type=["csv", "xlsx"], accept_multiple_files=True)
 
 # logic
-if uploaded_file:
+if uploaded_file:  # This is fine
     for file in uploaded_file:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
         # Read our file in pandas data frame
-        if file_ext ==".csv":
+        if file_ext == ".csv":
             # Handle different encodings for CSV files
             file_content = file.getvalue()
             buffer = BytesIO(file_content)
