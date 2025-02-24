@@ -8,15 +8,15 @@ st.set_page_config(page_title="📀 Data Sweeper", layout="wide")
 st.title("📀_Data Sweeper")
 st.write("Transform your files 📂 between CSV and Excel formats")
 
-# file upload
+# File upload
 uploaded_file = st.file_uploader("Upload your files here (CSV or Excel):", type=["csv", "xlsx"], accept_multiple_files=True)
 
-# logic
-if uploaded_file:  # This is fine
+# Logic
+if uploaded_file:  # Check if files are uploaded
     for file in uploaded_file:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
-        # Read our file in pandas data frame
+        # Read the file into a pandas DataFrame
         if file_ext == ".csv":
             # Handle different encodings for CSV files
             file_content = file.getvalue()
@@ -41,9 +41,9 @@ if uploaded_file:  # This is fine
 
         # Display info about the file
         st.write(f"📁 File Name 📁: {file.name}")
-        st.write(f"File Size: {file.size/1024} KB")
+        st.write(f"File Size: {file.size / 1024:.2f} KB")
 
-        # Show 5 rows of our data frame (df)
+        # Show 5 rows of the DataFrame
         st.write("Preview the head of the 📊 dataframe:")
         st.dataframe(df.head())
 
@@ -52,36 +52,46 @@ if uploaded_file:  # This is fine
         if st.checkbox(f"Clean Data for {file.name}"):
             col1, col2 = st.columns(2)
 
-            # with is a contact manager
+            # Remove duplicates
             with col1:
-                # Add button to remove duplicates
                 if st.button(f"Remove Duplicates from {file.name}"):
-                    # pandas builtin function to drop duplicates
-                    df.drop_duplicates(inplace=True) #inplace alter the state of original data frame
+                    df.drop_duplicates(inplace=True)
                     st.write("Duplicates Removed Successfully!")
+
+            # Fill missing values
             with col2:
-                # Fill missing values
                 if st.button(f"Fill missing values for {file.name}"):
                     numeric_cols = df.select_dtypes(include=["number"]).columns
-                    # fillna allow us to fill missing values with a specific value N/A or NaN
-                    df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
-                    st.write("Missing values filled successfully!")
+                    if not numeric_cols.empty:  # Check if there are numeric columns
+                        df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
+                        st.write("Missing values filled successfully!")
+                    else:
+                        st.warning("No numeric columns found to fill missing values.")
+
         # Choose specific columns to keep or convert
         st.subheader("Select Columns to Convert!")
-        # Multi-select box to choose columns
         columns = st.multiselect(f"Choose columns for {file.name}", df.columns, default=df.columns)
-        df = df[columns]
+        
+        # Handle empty columns selection
+        if not columns:  # If no columns are selected
+            st.warning("No columns selected. Using all columns by default.")
+            columns = df.columns  # Use all columns
+        
+        df = df[columns]  # Subset the DataFrame
 
         # Create some visualizations
         st.subheader("📈 Data Visualization")
         if st.checkbox(f"Show Visualization for {file.name}"):
-            st.bar_chart(df.select_dtypes(include="number").iloc[:,:2])
-        
+            numeric_df = df.select_dtypes(include="number")
+            if not numeric_df.empty:  # Check if there are numeric columns
+                st.bar_chart(numeric_df.iloc[:, :2])  # Show the first two numeric columns
+            else:
+                st.warning("No numeric columns found for visualization.")
+
         # Convert the file -> CSV or Excel and Excel to CSV
         st.subheader("🔄 Conversion Options")
-        conversion_type = st.radio(f"Covert {file.name} to:", ["CSV", "Excel"], key=file.name)
-        if st.button(f"Covert {file.name}"):
-            # Bytes IO, it converts the data from you file into binary and store it in your memory for short term
+        conversion_type = st.radio(f"Convert {file.name} to:", ["CSV", "Excel"], key=file.name)
+        if st.button(f"Convert {file.name}"):
             buffer = BytesIO()
             if conversion_type == "CSV":
                 df.to_csv(buffer, index=False)
@@ -96,8 +106,9 @@ if uploaded_file:  # This is fine
             # Download button
             st.download_button(
                 label=f"🔻 Download {file.name} as {conversion_type}",
-                data = buffer,
-                file_name = file_name,
-                mime = mime_type
+                data=buffer,
+                file_name=file_name,
+                mime=mime_type
             )
+
 st.success("🎉 All files processed!")
