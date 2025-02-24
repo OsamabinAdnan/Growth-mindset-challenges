@@ -4,7 +4,7 @@ import os
 from io import BytesIO
 
 # Set up our app
-st.set_page_config(page_title="📀_Data Sweeper", layout="wide")
+st.set_page_config(page_title="📀 Data Sweeper", layout="wide")
 st.title("📀_Data Sweeper")
 st.write("Transform your files 📂 between CSV and Excel formats")
 
