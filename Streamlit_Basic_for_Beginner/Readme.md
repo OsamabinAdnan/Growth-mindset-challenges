@@ -1,7 +1,8 @@
 # Streamlit
 
 ## How to install and validate Streamlit
-- Simple type this command in terminal and run it to instal
+- Simple type this command in terminal and run it to install
+
 ![Installation Command](Images/install.png)
 
 or Go to [Official Document](https://docs.streamlit.io/get-started/installation) to learn in detail
