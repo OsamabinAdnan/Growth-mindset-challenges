@@ -6,7 +6,8 @@
 
 or Go to [Official Document](https://docs.streamlit.io/get-started/installation) to learn in detail
 
-- Validate the installation by running our Hello app:
+- Validate the installation by running Hello app:
+
 ![Validate installation](Images/validate.png)
 
 - When you type validation command in terminal and run it, terminal will run local server, as you can see in the below pictures
@@ -43,13 +44,13 @@ or Go to [Official Document](https://docs.streamlit.io/get-started/installation)
 
 Apart from code of app.py, you can also explore display media using Cheat code link
 
-![Display Media](/Images/displaymedia.png)
-
+![Display Media](Images/displaymedia.png)
+ 
 [Streamlit API cheat sheet](https://docs.streamlit.io/develop/quick-reference/cheat-sheet)
 
 ## App Gallery
 
-![App Gallery](/Images/gallery.png)
+![App Gallery](Images/gallery.png)
 
 The Streamlit App Gallery is a collection of publicly shared Streamlit apps created by developers and the Streamlit community. It serves as a showcase of different use cases, including data visualizations, AI/ML apps, dashboards, and productivity tools.
 
@@ -62,7 +63,7 @@ The Streamlit App Gallery is a collection of publicly shared Streamlit apps crea
 
 ## Components
 
-![Components](/Images/components.png)
+![Components](Images/components.png)
 
 Streamlit components allow developers to extend Streamlit’s functionality by integrating custom UI elements, JavaScript, HTML, and external libraries into their apps.
 
