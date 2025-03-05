@@ -63,9 +63,9 @@ source .venv/bin/activate
 streamlit run password_generator.py
 ```
 
-### 6️⃣ Check password generator live
-```sh
+### 6️⃣ Check password generator app live
+
 [Password Generator](https://passwordgenerator-ramdamcoding-day3.streamlit.app/)
-```
+
 
 🎉 That’s it! Your Password Generator is ready to use 🚀
