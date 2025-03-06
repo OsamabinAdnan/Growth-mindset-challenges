@@ -1,14 +1,15 @@
-from fastapi import FastAPI
-import random
+from fastapi import FastAPI # Import FastAPI framework for building APIs
+import random # Import random module to randomly select values from lists
 
 # Create a FastAPI instance, it is recommended to name the instance "app"
 app = FastAPI()
 
-# we will build 2 simple get endpoints
+# We will build 2 simple get endpoints
 
 # 1. side_hustle api
 # 2. money_quotes api
 
+# List of various side hustle ideas
 side_hustle = [
     "Freelancing - Start offering your skills online!",
     "Dropshipping - Sell without handling inventory!",
@@ -23,6 +24,7 @@ side_hustle = [
     "App Development - Create mobile or web applications for businesses!",
 ]
 
+# List of famous money-related quotes
 money_quotes = [
     "The way to get started is to quit talking and begin doing. – Walt Disney",
     "Formal education will make you a living; self-education will make you a fortune. – Jim Rohn",
@@ -43,17 +45,22 @@ money_quotes = [
 
 # Decorator to define a path operation for the root endpoint
 
+# Define a GET endpoint to return a random side hustle idea
 @app.get("/side_hustle")
 def get_side_hustle():
     """Returns a random side hustle idea"""
     # Return a object with a "side_hustle" key and a random value from the side_hustle list
     return {"side_hustle": random.choice(side_hustle)}
 
+# Define a GET endpoint to return a random money quote
 @app.get("/money_quotes")
 def get_money_quotes():
     """Returns a random money quote"""
     # Return a object with a "money_quotes" key and a random value from the money_quotes list
     return {"money_quotes": random.choice(money_quotes)}
+
+
+# ------------------------------------------------------------------------------------------------
 
 # What if we add parameters to the endpoint in order to secure it?
 
