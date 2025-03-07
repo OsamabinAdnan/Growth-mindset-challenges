@@ -66,3 +66,5 @@ streamlit run main.py
 ```
 
 🎉 That’s it! Your Money Making Machine is ready to use 🚀
+
+Check Live App ➡ [Money Making Machine](https://moneymakingmachine-ramadancoding-day05.streamlit.app/)
