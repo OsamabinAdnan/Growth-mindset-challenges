@@ -4,8 +4,13 @@ import random  # Imports random number generator
 import time  # Imports time-related functions
 import requests  # Imports tool for making web requests
 
+st.set_page_config(
+    page_title="Money Making Machine",
+    page_icon=":moneybag:",
+    layout="centered")
+
 # Set the title of our web app
-st.title("Money Making Machine")
+st.title("💸 Money Making Machine 💰")
 
 
 # Function to create random amount of money
