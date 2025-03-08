@@ -70,7 +70,7 @@ st.subheader("Convert Time between Time Zones")
 # Create an input field for selecting the time to convert
 current_time = st.time_input(
     "Current Time of (From) Zone",  # Label for input field
-    value=datetime.now().time()  # Default value set to the current system time
+    value=datetime.now()  # Default value set to the current system time
 )
 
 # **Select source (From) time zone**
