@@ -105,6 +105,9 @@ To run the application, navigate to the directory containing **`main.py`** and r
 ```bash
 streamlit run main.py
 ```
+### **Check App live**
+
+**[Gemini Powered AI Chatbot](https://aipoweredchatbot-osamabinadnan.streamlit.app/)**
 
 ### **List of all models of Gemini till date**
 

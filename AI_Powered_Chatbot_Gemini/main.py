@@ -10,8 +10,8 @@ load_dotenv()
 
 # Configure Streamlit page settings
 st.set_page_config(
-    page_title=" Chat with Gemini-Pro!",  # Sets the webpage title
-    page_icon="🧠",  # Emoji used as the page icon (favicon)
+    page_title=" Chat with Gemini Flash!",  # Sets the webpage title
+    page_icon="🤖",  # Emoji used as the page icon (favicon)
     layout="centered",  # Uses a wider layout for better chat display
 )
 
