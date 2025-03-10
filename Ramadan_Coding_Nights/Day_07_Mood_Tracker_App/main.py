@@ -34,42 +34,6 @@ def save_mood_data(date, mood):
         writer = csv.writer(file)  # Create a CSV writer
         writer.writerow([date, mood])  # Write a new row with date and mood
 
-# Function to encode an image file in Base64 format
-def get_base64_image(image_path):
-    """
-    Reads an image file and encodes it in Base64 format.
-    """
-    if os.path.exists(image_path):
-        with open(image_path, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode()
-    else:
-        return None  # Return None if image doesn't exist
-# Encode the image for display in HTML
-img_base64 = get_base64_image("images/mood2.png")
-
-# Use HTML + CSS to control image size and centering
-if img_base64:
-    st.markdown(f"""
-        <style>
-            .custom-img-container {{
-                display: flex;
-                justify-content: center; /* Centers horizontally */
-                align-items: center; /* Centers vertically */
-            }}
-            .custom-img {{
-                width: 220px;  /* Set width */
-                height: 120px; /* Set height */
-                object-fit: cover; /* Prevents distortion */
-                border-radius: 10px; /* Optional: Rounded corners */
-            }}
-        </style>
-        <div class="custom-img-container">
-            <img src="data:image/png;base64,{img_base64}" class="custom-img">
-        </div>
-    """, unsafe_allow_html=True)
-else:
-    st.warning("⚠️ Image not found! Please upload 'mood2.png' to the 'images' folder.")
-
 # Title of the app
 st.title("🙂 Mood 😐 Tracker ☹️")
 
