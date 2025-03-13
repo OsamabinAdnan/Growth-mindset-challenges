@@ -17,7 +17,6 @@ side_hustles = [
     "App Development - Create mobile or web applications for businesses!",
 ]
 
-
 money_quotes = [
     "The way to get started is to quit talking and begin doing. – Walt Disney",
     "Formal education will make you a living; self-education will make you a fortune. – Jim Rohn",
@@ -36,21 +35,22 @@ money_quotes = [
     "Money grows on the tree of persistence. – Japanese Proverb",
 ]
 
-
 @app.get("/")
 def read_root():
     return {
         "message": "Hello World, Go to /side_hustles or /money_quotes to get a random side hustle or money quote"
     }
 
-
 @app.get("/side_hustles")
 def get_side_hustles():
     """Returns a random side hustle idea"""
     return {"side_hustle": random.choice(side_hustles)}
 
-
 @app.get("/money_quotes")
 def get_money_quotes():
     """Returns a random money quote"""
     return {"money_quote": random.choice(money_quotes)}
+
+# Required for Vercel
+from mangum import Mangum
+handler = Mangum(app)
