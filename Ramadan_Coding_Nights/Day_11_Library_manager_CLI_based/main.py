@@ -49,7 +49,7 @@ class BookCollection:
 
         self.book_list.append(new_book)  # Add book to collection
         self.save_to_file()  # Save updated collection to file
-        print(f"Book '📗{book_title}' added to the collection.")
+        print(f"\nBook '📗{book_title}' added to the collection.")
     
     def delete_book(self):
         """Remove a book from the collection using its title."""
@@ -66,7 +66,7 @@ class BookCollection:
     
     def find_book(self):
         """Search for books in the collection by title or author name."""
-        search_type = input("Search book by:\n1. Title\n2. Author\nEnter your choice (title/author): ")  # Get search preferences
+        search_type = input("Search book by:\n1. Title\n2. Author\nEnter your choice: ")  # Get search preferences
         search_text = input("Enter search term to search the book (title/author name):").strip().lower()  # Get search term
 
         found_books = [
@@ -84,7 +84,7 @@ class BookCollection:
                     f"{index}. {book['title']} by {book['author']} ({book['year']}) - Genre: {book['genre']} - Has been read: {reading_status}"
                 )
         else:
-            print(f"No books found matching '{search_text}'")  # No books found message
+            print(f"\nNo books found matching '{search_text}'")  # No books found message
     
     def update_book(self):
         """Modify the details of an existing book in the collection."""
