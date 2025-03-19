@@ -76,7 +76,7 @@ Enter your name and send the message
 You should see the following output:
 
 ```sh
-Your name is: Asharib / Your Name
+Your name is: Osama bin Adnan / Your Name
 Chainlit installation is working!
 You can now start building your own chainlit apps!
 ```
