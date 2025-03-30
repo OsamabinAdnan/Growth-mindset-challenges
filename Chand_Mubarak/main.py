@@ -61,7 +61,7 @@ def add_custom_css():
             margin-top: 20px;
         }
         .sub-title {
-            color: #FFFFFF;
+            color: white;
             text-align: center;
             font-size: 1.5em;
             animation: slideIn 1s ease-out;
