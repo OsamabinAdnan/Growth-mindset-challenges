@@ -35,6 +35,21 @@ def set_background():
             background-position: center;
             animation: fadeIn 2s ease-in-out;
             min-height: 100vh;
+            position: relative;
+        }}
+        .stApp::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+            z-index: 0;
+        }}
+        .stApp > * {{
+            position: relative;
+            z-index: 1;
         }}
         @keyframes fadeIn {{
             0% {{ opacity: 0; }}
@@ -50,31 +65,37 @@ def add_custom_css():
     st.markdown(
         """
         <style>
+        /* Import a festive font */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
         /* General styling */
         .main-title {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Great Vibes', cursive;
             color: #FFD700;
             text-align: center;
-            font-size: 3em;
+            font-size: 4em;
             animation: glow 1.5s ease-in-out infinite alternate;
             text-shadow: 0 0 10px #FFD700, 0 0 20px #FFFFFF;
             margin-top: 20px;
         }
         .sub-title {
-            color: white;
+            font-family: 'Arial', sans-serif;
+            color: #FFFFFF;
+            text-alignV: initial;
             text-align: center;
             font-size: 1.5em;
             animation: slideIn 1s ease-out;
             margin-bottom: 30px;
         }
         .quote-box {
-            background-color: rgba(26, 60, 52, 0.8);
+            background-color: rgba(26, 60, 52, 0.9);
             padding: 20px;
             border-radius: 15px;
             color: #FFFFFF;
             font-style: italic;
             animation: bounceIn 0.8s ease;
-            margin: 10px 0;
+            margin: 20px 0;
+            border: 2px solid #FFD700;
         }
         .button-style {
             background-color: #FFD700;
@@ -108,12 +129,13 @@ def add_custom_css():
             color: #FFFFFF;
             text-align: center;
             font-size: 1.2em;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
             border-radius: 10px;
             animation: pulse 2s infinite;
             margin: 20px auto;
             width: fit-content;
+            border: 2px solid #FFD700;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -126,14 +148,16 @@ def add_custom_css():
             font-size: 1.5em;
             margin-top: 40px;
             margin-bottom: 20px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            border: 2px solid #FFD700;
         }
         .footer a {
             color: #FFD700;
             text-decoration: none;
             margin: 0 15px;
+            font-size: 1.2em;
             transition: transform 0.3s, color 0.3s;
         }
         .footer a:hover {
@@ -142,10 +166,16 @@ def add_custom_css():
         }
         /* Improve Streamlit elements */
         .stCheckbox, .stRadio, .stTextArea, .stFileUploader, .stButton {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 15px 0;
+            border: 2px solid #FFD700;
+        }
+        .stCheckbox > label, .stRadio > label, .stTextArea > label, .stFileUploader > label {
+            color: #FFFFFF;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000000;
         }
         .stButton > button {
             background-color: #FFD700;
@@ -155,6 +185,7 @@ def add_custom_css():
             border-radius: 25px;
             font-weight: bold;
             transition: transform 0.3s;
+            border: 2px solid #1A3C34;
         }
         .stButton > button:hover {
             transform: scale(1.1);
@@ -162,6 +193,19 @@ def add_custom_css():
         .stRadio > div {
             display: flex;
             justify-content: center;
+            gap: 20px;
+        }
+        .stRadio > div > label {
+            color: #FFFFFF;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000000;
+        }
+        .st-subheader {
+            color: #FFD700;
+            text-align: center;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px #000000;
+            margin-top: 20px;
         }
         </style>
         """,
