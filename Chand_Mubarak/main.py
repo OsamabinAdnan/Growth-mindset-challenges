@@ -19,21 +19,22 @@ quotes = [
     "May Allah shower His blessings upon you this Chand Raat and always!"
 ]
 
-# Eid date (for countdown) - Assuming Eid is on April 1, 2025
+# Eid date (for countdown) - Assuming Eid is on March 31, 2025
 eid_date = datetime(2025, 3, 31, 0, 0, 0)
 
-# Function to set background image
-def set_background(image_file):
-    with open(image_file, "rb") as image:
-        encoded_string = base64.b64encode(image.read()).decode()
+# Function to set background image (using a URL instead of local file)
+def set_background():
+    # Using a publicly hosted image URL for deployment
+    image_url = "https://images.unsplash.com/photo-1579003593419-98f949b9398f?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     st.markdown(
         f"""
         <style>
         .stApp {{
-            background-image: url(data:image/png;base64,{encoded_string});
+            background-image: url("{image_url}");
             background-size: cover;
             background-position: center;
             animation: fadeIn 2s ease-in-out;
+            min-height: 100vh;
         }}
         @keyframes fadeIn {{
             0% {{ opacity: 0; }}
@@ -57,12 +58,14 @@ def add_custom_css():
             font-size: 3em;
             animation: glow 1.5s ease-in-out infinite alternate;
             text-shadow: 0 0 10px #FFD700, 0 0 20px #FFFFFF;
+            margin-top: 20px;
         }
         .sub-title {
             color: #FFFFFF;
             text-align: center;
             font-size: 1.5em;
             animation: slideIn 1s ease-out;
+            margin-bottom: 30px;
         }
         .quote-box {
             background-color: rgba(26, 60, 52, 0.8);
@@ -81,6 +84,8 @@ def add_custom_css():
             border-radius: 25px;
             font-weight: bold;
             transition: transform 0.3s;
+            display: block;
+            margin: 10px auto;
         }
         .button-style:hover {
             transform: scale(1.1);
@@ -107,6 +112,8 @@ def add_custom_css():
             padding: 10px;
             border-radius: 10px;
             animation: pulse 2s infinite;
+            margin: 20px auto;
+            width: fit-content;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -117,7 +124,11 @@ def add_custom_css():
             text-align: center;
             color: #FFFFFF;
             font-size: 1.5em;
-            margin-top: 20px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
         }
         .footer a {
             color: #FFD700;
@@ -129,6 +140,29 @@ def add_custom_css():
             color: #FFFFFF;
             transform: scale(1.2);
         }
+        /* Improve Streamlit elements */
+        .stCheckbox, .stRadio, .stTextArea, .stFileUploader, .stButton {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .stButton > button {
+            background-color: #FFD700;
+            color: #1A3C34;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .stButton > button:hover {
+            transform: scale(1.1);
+        }
+        .stRadio > div {
+            display: flex;
+            justify-content: center;
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -139,23 +173,8 @@ def main():
     # Add custom CSS
     add_custom_css()
 
-    # Set festive background
-    try:
-        set_background("images/abc1.webp")
-    except FileNotFoundError:
-        st.warning("Background image not found. Using default theme.")
-        st.markdown(
-            """
-            <style>
-            .stApp {
-                background: linear-gradient(135deg, #1a3c34, #4a7b65);
-                color: #ffffff;
-                animation: fadeIn 2s ease-in-out;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
+    # Set festive background using a URL
+    set_background()
 
     # Title and greeting with animation
     st.markdown("<h1 class='main-title'>🌙 Chand Raat Mubarak! 🌙</h1>", unsafe_allow_html=True)
@@ -206,8 +225,8 @@ def main():
         """
         <div class='footer'>
             <p>Made by Osama bin Adnan with ❤️</p>
-            <a href='https://www.linkedin.com/in/osama-bin-adnan/' target='_blank'>LinkedIn</a>|
-            <a href='https://x.com/osamabinadnan1' target='_blank'>X</a>
+            <a href='https://www.linkedin.com/in/osama-bin-adnan/' target='_blank'>🌐 LinkedIn</a>
+            <a href='https://x.com/osamabinadnan1' target='_blank'>🐦 X</a>
         </div>
         """,
         unsafe_allow_html=True
