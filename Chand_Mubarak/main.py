@@ -127,7 +127,7 @@ def main():
                 minutes = remainder // 60
                 st.markdown(f"<div class='countdown'>Eid in: {days}d {hours}h {minutes}m</div>", unsafe_allow_html=True)
             elif time_left.total_seconds() == 0:
-                st.markdown("<div class='countdown'>Eid Mubarak!</div>", unsafe_allow_html=True)
+                st.markdown("<div class='countdown'>Count down is over! Wishing you Eid Mubarak!</div>", unsafe_allow_html=True)
 
         if st.button("Generate Wish"):
             st.markdown(f"<div class='quote-box'>{random.choice(quotes)}</div>", unsafe_allow_html=True)
