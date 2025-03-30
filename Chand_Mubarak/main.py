@@ -27,11 +27,11 @@ def add_custom_css():
         """
         <style>
         /* Import fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Open+Sans:wght@400;600&display=swap');
 
         /* General styling */
         .stApp {
-            background: #1A2A44; /* Midnight Blue */
+            background: #FFF8E1; /* Soft Cream */
             min-height: 100vh;
             position: relative;
             overflow: hidden;
@@ -43,8 +43,8 @@ def add_custom_css():
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.2;
+            background: url('https://www.transparenttextures.com/patterns/arabesque.png');
+            opacity: 0.1;
             z-index: 0;
         }
         .stApp > * {
@@ -52,51 +52,51 @@ def add_custom_css():
             z-index: 1;
         }
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: #FFFFFF; /* Pure White */
             max-width: 600px;
             margin: 40px auto;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         .main-title {
-            font-family: 'Dancing Script', cursive;
-            color: #FFC107; /* Golden Yellow */
+            font-family: 'Lora', serif;
+            color: #212121; /* Jet Black */
             text-align: center;
-            font-size: 3.5em;
+            font-size: 3.2em;
             margin-bottom: 10px;
             animation: fadeIn 1.5s ease-in-out;
         }
         .sub-title {
-            font-family: 'Poppins', sans-serif;
-            color: #1A2A44; /* Midnight Blue */
+            font-family: 'Open Sans', sans-serif;
+            color: #212121; /* Jet Black */
             text-align: center;
             font-size: 1.2em;
             margin-bottom: 30px;
             animation: fadeIn 2s ease-in-out;
         }
         .quote-box {
-            background: #1A2A44; /* Midnight Blue */
-            color: #F5F5F5; /* Soft White */
+            background: #FFCC80; /* Golden Peach */
+            color: #212121; /* Jet Black */
             padding: 15px;
             border-radius: 10px;
-            border-left: 5px solid #FFC107; /* Golden Yellow */
+            border-left: 5px solid #2ECC71; /* Emerald Green */
             margin: 20px 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             font-style: italic;
             animation: slideInLeft 0.8s ease;
         }
         .countdown {
-            background: #1A2A44; /* Midnight Blue */
-            color: #F5F5F5; /* Soft White */
+            background: #FFCC80; /* Golden Peach */
+            color: #212121; /* Jet Black */
             text-align: center;
             font-size: 1.2em;
             padding: 15px;
             border-radius: 10px;
-            border: 2px solid #FFC107; /* Golden Yellow */
+            border: 2px solid #2ECC71; /* Emerald Green */
             margin: 20px auto;
             width: fit-content;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             animation: fadeIn 1s ease;
         }
         /* Animations */
@@ -110,8 +110,8 @@ def add_custom_css():
         }
         /* Streamlit elements */
         .stCheckbox > label, .stRadio > label, .stTextArea > label, .stFileUploader > label, .st-subheader {
-            font-family: 'Poppins', sans-serif;
-            color: #1A2A44; /* Midnight Blue */
+            font-family: 'Open Sans', sans-serif;
+            color: #212121; /* Jet Black */
             font-weight: 600;
             margin-bottom: 10px;
         }
@@ -120,14 +120,14 @@ def add_custom_css():
             font-size: 1.5em;
         }
         .stCheckbox, .stRadio, .stTextArea, .stFileUploader {
-            background: #F5F5F5; /* Soft White */
+            background: #FFFFFF; /* Pure White */
             padding: 10px;
             border-radius: 8px;
-            border: 2px solid #1A2A44; /* Midnight Blue */
+            border: 2px solid #2ECC71; /* Emerald Green */
             transition: border-color 0.3s;
         }
         .stCheckbox:hover, .stRadio:hover, .stTextArea:hover, .stFileUploader:hover {
-            border-color: #26A69A; /* Teal */
+            border-color: #FFCC80; /* Golden Peach */
         }
         .stRadio > div {
             display: flex;
@@ -135,52 +135,53 @@ def add_custom_css():
             gap: 20px;
         }
         .stRadio > div > label {
-            color: #1A2A44; /* Midnight Blue */
+            color: #212121; /* Jet Black */
             font-weight: 400;
         }
         .stButton > button {
-            background: linear-gradient(45deg, #FFC107, #FFCA28); /* Golden Yellow to Amber */
-            color: #1A2A44; /* Midnight Blue */
+            background: #2ECC71; /* Emerald Green */
+            color: #FFFFFF; /* White for contrast */
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 600;
             transition: transform 0.3s, background 0.3s;
             display: block;
             margin: 10px auto;
         }
         .stButton > button:hover {
-            background: linear-gradient(45deg, #26A69A, #4DB6AC); /* Teal gradient */
+            background: #FFCC80; /* Golden Peach */
             transform: scale(1.05);
-            color: #F5F5F5; /* Soft White */
+            color: #212121; /* Jet Black */
         }
         .stSuccess, .stError {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             text-align: center;
+            color: #212121; /* Jet Black */
         }
-        /* Footer (same as your original) */
+        /* Footer (same as your original, with color adjustments) */
         .footer {
             text-align: center;
-            color: #FFFFFF;
+            color: #212121; /* Jet Black */
             font-size: 1.5em;
             margin-top: 40px;
             margin-bottom: 20px;
             padding: 15px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            border: 2px solid #FFC107; /* Golden Yellow */
-            font-family: 'Poppins', sans-serif;
+            border: 2px solid #2ECC71; /* Emerald Green */
+            font-family: 'Open Sans', sans-serif;
         }
         .footer a {
-            color: #FFC107; /* Golden Yellow */
+            color: #2ECC71; /* Emerald Green */
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.2em;
             transition: transform 0.3s, color 0.3s;
         }
         .footer a:hover {
-            color: #F5F5F5; /* Soft White */
+            color: #FFCC80; /* Golden Peach */
             transform: scale(1.2);
         }
         </style>
@@ -195,8 +196,6 @@ def main():
 
     # Main container
     with st.container():
-        st.markdown('<div class="container">', unsafe_allow_html=True)
-
         # Title and greeting
         st.markdown("<h1 class='main-title'>🌙 Chand Raat Mubarak! 🌙</h1>", unsafe_allow_html=True)
         st.markdown("<h3 class='sub-title'>Wishing you a night full of joy and blessings</h3>", unsafe_allow_html=True)
@@ -243,7 +242,7 @@ def main():
 
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Footer (same as your original)
+    # Footer (same as your original, with color adjustments)
     st.markdown(
         """
         <div class='footer'>
