@@ -66,6 +66,7 @@ def add_custom_css():
             font-size: 3.2em;
             margin-bottom: 10px;
             animation: fadeIn 1.5s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         .sub-title {
             font-family: 'Open Sans', sans-serif;
@@ -247,8 +248,12 @@ def main():
         """
         <div class='footer'>
             <p>Made by Osama bin Adnan with ❤️</p>
-            <a href='https://www.linkedin.com/in/osama-bin-adnan/' target='_blank'>🌐 LinkedIn</a>
-            <a href='https://x.com/osamabinadnan1' target='_blank'>🐦 X</a>
+            <a href='https://www.linkedin.com/in/osama-bin-adnan/' target='_blank'>
+                <img src='https://img.icons8.com/ios-filled/50/000000/linkedin.png' alt='LinkedIn' width = 40px>
+            </a>
+            <a href='https://x.com/osamabinadnan1' target='_blank'>
+                <img src='https://img.icons8.com/ios-filled/50/000000/x.png' alt='X' width = 30px>
+            </a>
         </div>
         """,
         unsafe_allow_html=True
