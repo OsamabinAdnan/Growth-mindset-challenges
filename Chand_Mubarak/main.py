@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 from datetime import datetime
+import pytz
 
 # Set page configuration
 st.set_page_config(
@@ -18,8 +19,10 @@ quotes = [
     "May Allah bless you this Chand Raat and always!"
 ]
 
+timezone = pytz.timezone('Asia/Karachi')
+
 # Eid date for countdown
-eid_date = datetime(2025, 3, 31)
+eid_date = timezone.localize(datetime(2025, 3, 31, 0, 0, 0))
 
 # Simplified CSS
 def add_custom_css():
@@ -118,7 +121,7 @@ def main():
         st.markdown("<h3>Wishing you joy and blessings</h3>", unsafe_allow_html=True)
 
         if st.checkbox("Show Eid Countdown"):
-            now = datetime.now()
+            now = datetime.now(timezone)
             time_left = eid_date - now
             st.balloons()
             if time_left.total_seconds() > 0:
@@ -127,7 +130,7 @@ def main():
                 minutes = remainder // 60
                 st.markdown(f"<div class='countdown'>Eid in: {days}d {hours}h {minutes}m</div>", unsafe_allow_html=True)
             elif time_left.total_seconds() == 0:
-                st.markdown("<div class='countdown'>Count down is over! Wishing you Eid Mubarak!</div>", unsafe_allow_html=True)
+                st.markdown("<div class='countdown'>Count down is over! Wishing you Eid Mubarak!</div>",unsafe_allow_html=True)
 
         if st.button("Generate Wish"):
             st.markdown(f"<div class='quote-box'>{random.choice(quotes)}</div>", unsafe_allow_html=True)
