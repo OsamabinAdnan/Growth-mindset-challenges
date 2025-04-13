@@ -2,59 +2,82 @@
 # IMPORTS AND CONFIGURATION
 ###########################################
 # Core Python imports
-import streamlit as st          # For creating web application interface
-import json                     # For handling JSON data storage
-import os                       # For file system operations
-import time                     # For handling time-based operations
+import streamlit as st          # Web framework for creating interactive UI
+import json                     # JSON handling for data persistence
+import os                       # File and directory operations
+import time                     # Time-based operations and timestamps
 
 # Cryptography-related imports
-from base64 import urlsafe_b64encode  # For safe base64 encoding of binary data
-from cryptography.fernet import Fernet  # For symmetric encryption operations
-from cryptography.hazmat.primitives import hashes  # For cryptographic hashing functions
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC  # For key derivation
-from cryptography.hazmat.backends import default_backend  # For crypto backend operations
+from base64 import urlsafe_b64encode  # URL-safe base64 encoding for binary data
+from cryptography.fernet import Fernet  # Implements AES-256 in CBC mode with PKCS7 padding
+from cryptography.hazmat.primitives import hashes  # Cryptographic hash functions
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC  # Key stretching function
+from cryptography.hazmat.backends import default_backend  # Cryptographic backend operations
 
-# Configure Streamlit page settings for better UI/UX
+# Set Streamlit page configuration for better UX
 st.set_page_config(
     page_title= "Secure Data Encryption",
-    page_icon= "🔐"  # Lock emoji for better visual identification
+    page_icon= "🔐"  # Lock emoji indicates security focus
 )
 
 ###########################################
 # CONSTANTS AND INITIALIZATION
 ###########################################
-# Define application constants
-DATA_FILE = 'data.json'        # JSON file for persistent data storage
-LOCKOUT_TIME = 60             # Account lockout duration (in seconds)
+# System-wide constants
+DATA_FILE = 'data.json'        # Persistent storage file for user data and encrypted content
+LOCKOUT_TIME = 60             # Duration (seconds) for account lockout after failed attempts
 
-# Initialize or load the persistent data storage
-# This stores user credentials and encrypted data
+# Initialize data storage
+# The stored_data structure:
+# {
+#     "username": {
+#         "salt": "hex_encoded_salt",
+#         "key": "derived_key_base64",
+#         "data": ["encrypted_item1", "encrypted_item2", ...]
+#     }
+# }
 if os.path.exists(DATA_FILE):
     with open(DATA_FILE, 'r') as file:
         stored_data = json.load(file)
 else:
-    stored_data = {}          # Start with empty storage if file doesn't exist
+    stored_data = {}          # Initialize empty if first run
+
+###########################################
+# SESSION STATE MANAGEMENT
+###########################################
+# Initialize session state variables
+if "user" not in st.session_state:
+    st.session_state.user = None              # Current logged-in username
+if "lockout" not in st.session_state:
+    st.session_state.lockout = 0              # Timestamp when lockout expires
+if 'failed_attempts' not in st.session_state:
+    st.session_state.failed_attempts = {}     # Track login failures per user
 
 ###########################################
 # SECURITY FUNCTIONS
 ###########################################
 def derive_key(passkey: str, salt: bytes) -> bytes:
     """
-    Derives an encryption key from a password using PBKDF2 (Password-Based Key Derivation Function 2)
-    This adds extra security by making brute-force attacks more difficult
+    Implements PBKDF2 (Password-Based Key Derivation Function 2) for secure key generation
+    
+    Technical Details:
+    - Uses SHA256 as the hash function
+    - Generates a 32-byte key (256 bits) suitable for AES-256
+    - Performs 100,000 iterations for computational cost
+    - Includes unique salt for rainbow table protection
     
     Args:
-        passkey (str): User's password for key derivation
-        salt (bytes): Random salt to prevent rainbow table attacks
+        passkey (str): User-provided password/key material
+        salt (bytes): Random salt (16 bytes recommended)
     Returns:
-        bytes: Derived encryption key suitable for Fernet encryption
+        bytes: URL-safe base64 encoded key for Fernet encryption
     """
     kdf = PBKDF2HMAC(
-        algorithm=hashes.SHA256(),    # SHA256 for secure hashing
-        length = 32,                  # 32-byte key for AES-256
-        salt=salt,                    # Random salt for uniqueness
-        iterations=100_000,           # High iteration count for security
-        backend=default_backend()     # Use default crypto backend
+        algorithm=hashes.SHA256(),    # SHA256 provides strong cryptographic security
+        length=32,                    # 32 bytes = 256 bits for AES-256
+        salt=salt,                    # Unique salt prevents precomputed attacks
+        iterations=100_000,           # High iteration count slows brute-force attempts
+        backend=default_backend()     # Use system's crypto backend
     )
     return urlsafe_b64encode(kdf.derive(passkey.encode()))
 
@@ -63,22 +86,16 @@ def derive_key(passkey: str, salt: bytes) -> bytes:
 ###########################################
 def save_data():
     """
-    Saves the current state of stored_data to the JSON file
-    This ensures data persistence between application restarts
+    Persists the current state to disk
+    
+    Handles:
+    - User credentials
+    - Encrypted data
+    - Salt values
+    - Derived keys
     """
     with open(DATA_FILE, 'w') as file:
         json.dump(stored_data, file)
-
-###########################################
-# SESSION STATE MANAGEMENT
-###########################################
-# Initialize session state variables for user management
-if "user" not in st.session_state:
-    st.session_state.user = None              # Track current logged-in user
-if "lockout" not in st.session_state:
-    st.session_state.lockout = 0              # Track account lockout time
-if 'failed_attempts' not in st.session_state:
-    st.session_state.failed_attempts = {}     # Track failed login attempts per user
 
 ###########################################
 # USER AUTHENTICATION
@@ -282,6 +299,7 @@ else:
     elif choice == 'Retrieve Data':
         # Data retrieval and decryption interface
         st.subheader('🔓 Retrieve Stored Data:')
+        st.write('Select a data item to decrypt:')
         for i, encrypted in enumerate(stored_data[user]['data']):
             if st.button(f"Decrypt Data {i+1}"):
                 try:
@@ -297,3 +315,31 @@ else:
         st.session_state.lockout = 0
         st.success('👋 Logged out successfully.')
 
+
+# Add horizontal line separator
+st.write('---')
+
+# Create footer with social media links using HTML/CSS
+st.markdown(
+    """
+    <div style=" text-align: center; color: #888; font-size: 1.2em;">
+        Made with ❤️ by <a href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" target="_blank" style="color: #888;">Osama bin Adnan</a>
+        <div style="display: flex; justify-content: center; margin-top: 10px; gap: 10px;">
+            <a href='https://github.com/OsamaBinAdnan' target='_blank'>
+                <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">    
+            </a>
+            <a href='https://www.linkedin.com/in/osama-bin-adnan/' target='_blank'>
+                <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+            </a>
+            <a href='https://x.com/osamabinadnan1' target='_blank'>
+                <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter">
+            </a>
+            <a href='https://youtube.com/@ainertia/' target='_blank'>
+                <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+            </a>
+        </div>
+    </div>
+    """,
+    # Allow HTML rendering in Streamlit
+    unsafe_allow_html=True    
+)
