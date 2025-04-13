@@ -9,16 +9,35 @@ import time                     # Time-based operations and timestamps
 
 # Cryptography-related imports
 from base64 import urlsafe_b64encode  # URL-safe base64 encoding for binary data
+import base64                          # Base64 encoding and decoding
 from cryptography.fernet import Fernet  # Implements AES-256 in CBC mode with PKCS7 padding
 from cryptography.hazmat.primitives import hashes  # Cryptographic hash functions
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC  # Key stretching function
 from cryptography.hazmat.backends import default_backend  # Cryptographic backend operations
 
+
+###########################################
+# PAGE CONFIGURATION
+###########################################
 # Set Streamlit page configuration for better UX
 st.set_page_config(
     page_title= "Secure Data Encryption",
     page_icon= "🔐"  # Lock emoji indicates security focus
 )
+
+
+# Set background gradient using CSS
+st.markdown("""
+    <style>
+    .stApp {
+        font-family: 'Inter', sans-serif;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 
 ###########################################
 # CONSTANTS AND INITIALIZATION
@@ -168,15 +187,14 @@ def decrypt_data(encrypted_text, key):
 ###########################################
 # Create navigation menu in sidebar
 st.sidebar.title('Secure Data Encryption System')
+st.sidebar.image('images/sidebar.png', use_container_width= True)
 
 # Create title for main page
 st.title('🔐 Secure Data Encryption 🔑')
 
-
-
 # Authentication UI - Handle user login/register
 if not st.session_state.user:
-    st.subheader('🔐 Login or Register 🔑')
+    st.subheader(' Login or Register')
     auth_action = st.radio('First register yourself then login to continue', ['Login', 'Register'])
     username = st.text_input('Username')
     password = st.text_input('Password', type='password')
@@ -328,7 +346,7 @@ st.write('---')
 st.markdown(
     """
     <div style=" text-align: center; color: #888; font-size: 1.2em;">
-        Made with ❤️ by <a href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" target="_blank" style="color: #888;">Osama bin Adnan</a>
+        Made by <a href="/" target="_blank" style="color: #888;">Osama bin Adnan</a>
         <div style="display: flex; justify-content: center; margin-top: 10px; gap: 10px;">
             <a href='https://github.com/OsamaBinAdnan' target='_blank'>
                 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">    
