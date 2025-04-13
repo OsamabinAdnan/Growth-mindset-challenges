@@ -126,7 +126,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📺 Live Demo
 
-[Secure Data Encryption]()
+[Secure Data Encryption](https://securedata-encryptionsystem-osamabinadnan.streamlit.app/)
 
 ## 👨‍💻 Author
 

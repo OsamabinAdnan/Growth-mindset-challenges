@@ -169,10 +169,15 @@ def decrypt_data(encrypted_text, key):
 # Create navigation menu in sidebar
 st.sidebar.title('Secure Data Encryption System')
 
+# Create title for main page
+st.title('🔐 Secure Data Encryption 🔑')
+
+
+
 # Authentication UI - Handle user login/register
 if not st.session_state.user:
     st.subheader('🔐 Login or Register 🔑')
-    auth_action = st.radio('Select Action', ['Login', 'Register'])
+    auth_action = st.radio('First register yourself then login to continue', ['Login', 'Register'])
     username = st.text_input('Username')
     password = st.text_input('Password', type='password')
 
