@@ -187,7 +187,7 @@ def decrypt_data(encrypted_text, key):
 ###########################################
 # Create navigation menu in sidebar
 st.sidebar.title('Secure Data Encryption System')
-st.sidebar.image('images/sidebar.png', use_container_width= True)
+st.sidebar.image('images/sidebar.png')
 
 # Create title for main page
 st.title('🔐 Secure Data Encryption 🔑')
