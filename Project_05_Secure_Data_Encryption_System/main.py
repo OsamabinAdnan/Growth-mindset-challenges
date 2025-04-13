@@ -9,7 +9,6 @@ import time                     # Time-based operations and timestamps
 
 # Cryptography-related imports
 from base64 import urlsafe_b64encode  # URL-safe base64 encoding for binary data
-import base64                          # Base64 encoding and decoding
 from cryptography.fernet import Fernet  # Implements AES-256 in CBC mode with PKCS7 padding
 from cryptography.hazmat.primitives import hashes  # Cryptographic hash functions
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC  # Key stretching function
@@ -187,7 +186,7 @@ def decrypt_data(encrypted_text, key):
 ###########################################
 # Create navigation menu in sidebar
 st.sidebar.title('Secure Data Encryption System')
-st.sidebar.image('images/sidebar.png')
+st.sidebar.image('https://sdmntprwestus.oaiusercontent.com/files/00000000-f1c4-6230-a860-250bd94f55df/raw?se=2025-04-13T17%3A54%3A59Z&sp=r&sv=2024-08-04&sr=b&scid=c4f46496-4097-5ba8-8b44-3d2764ac81b9&skoid=fa7966e7-f8ea-483c-919a-13acfd61d696&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-13T11%3A05%3A36Z&ske=2025-04-14T11%3A05%3A36Z&sks=b&skv=2024-08-04&sig=4YM8oWDZPShaJn5uqrVj3%2BMSdQdvgNDiiCAA2fCZQIk%3D', use_container_width=True)
 
 # Create title for main page
 st.title('🔐 Secure Data Encryption 🔑')
